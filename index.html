@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguimiento de Envíos | Servientrega</title>
-    <link rel="icon" href="https://via.placeholder.com/32/0033a0/FFFFFF?text=SV" type="image/x-icon">
+    <link rel="icon" href="https://via.placeholder.com/32/008000/FFFFFF?text=SV" type="image/x-icon">
     <style>
         :root {
-            --primary-color: #0033a0;
+            --primary-color: #008000; /* Verde Servientrega */
             --secondary-color: #f5f7fa;
             --accent-color: #ff6600;
             --text-color: #333;
@@ -74,44 +74,68 @@
             margin-right: 12px;
             font-weight: bold;
         }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), #0051c5);
+        
+        .admin-link {
+            background-color: var(--primary-color);
             color: white;
-            padding: 60px 0;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .admin-link:hover {
+            background-color: #006000;
+        }
+
+        /* Hero Section with Slideshow */
+        .hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 32px;
+            font-size: 36px;
             margin-bottom: 15px;
         }
 
         .hero p {
             font-size: 18px;
             max-width: 700px;
-            margin: 0 auto;
             opacity: 0.9;
         }
 
@@ -184,15 +208,7 @@
         }
 
         .btn:hover {
-            background-color: #002280;
-        }
-
-        .btn-accent {
-            background-color: var(--accent-color);
-        }
-
-        .btn-accent:hover {
-            background-color: #e55500;
+            background-color: #006000;
         }
 
         /* Tracking Result */
@@ -285,7 +301,7 @@
         }
 
         .timeline-location {
-            color: var(--light-text);
+           color: var(--light-text);
         }
 
         .timeline-line {
@@ -302,49 +318,20 @@
             display: none;
         }
 
-        /* Services Section */
-        .services-section {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .service-card {
-            text-align: center;
-             text-align: center;
-            padding: 20px;
+        /* Map Container */
+        .map-container {
+            margin-top: 20px;
+            height: 300px;
+            background-color: #e0e6ed;
             border-radius: 8px;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 24px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 10px;
-            color: var(--primary-color);
+            align-items: center;
+            color: var(--light-text);
+            font-size: 18px;
+            background-image: url('https://via.placeholder.com/800x300/008000/FFFFFF?text=Mapa+de+Seguimiento+en+Tiempo+Real');
+            background-size: cover;
+            background-position: center;
         }
 
         /* Footer */
@@ -440,6 +427,7 @@
                         <li><a href="#tracking">Seguimiento</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#contact">Contacto</a></li>
+                        <li><a href="admin.html" class="admin-link">Acceso Admin</a></li>
                     </ul>
                 </nav>
             </div>
@@ -447,9 +435,29 @@
     </header>
 
     <section class="hero">
-        <div class="container">
-            <h1>Seguimiento de Envíos</h1>
-            <p>Conoce el estado actual de tu paquete en tiempo real. Introduce tu número de guía para continuar.</p>
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop');">
+            <div class="slide-content">
+                <h1>Conectamos a Colombia</h1>
+                <p>Tu paquete viaja por las carreteras más hermosas del país para llegar a tus manos.</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1579033016046-cd08702e175a?q=80&w=2070&auto=format&fit=crop');">
+            <div class="slide-content">
+                <h1>La Magia del Envío</h1>
+                <p>Desde la vibrante Bogotá hasta el corazón del Eje Cafetero, llegamos a todos los rincones.</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1605002591074-a059a75472e4?q=80&w=2070&auto=format&fit=crop');">
+            <div class="slide-content">
+                <h1>Logística que Impulsa</h1>
+                <p>Nuestros almacenes están equipados para manejar tus envíos con la mayor eficiencia.</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=2070&auto=format&fit=crop');">
+            <div class="slide-content">
+                <h1>Compromiso con tu Negocio</h1>
+                <p>Soluciones de paquetería adaptadas a las necesidades de los emprendedores colombianos.</p>
+            </div>
         </div>
     </section>
 
@@ -509,10 +517,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="map-container" id="map">
+                        Mapa interactivo del recorrido en tiempo real
+                    </div>
                 </div>
-            </section>
-
-            <section id="services" class="services-section">
+            </<section id="services" class="services-section">
                 <h2 class="section-title">Nuestros Servicios</h2>
                 <div class="services-grid">
                     <div class="service-card">
@@ -560,8 +569,7 @@
                     <h3>Contacto</h3>
                     <ul>
                         <li>Teléfono: 01 8000 123 456</li>
-                        <li>Email: info@service
-                            <li>Email: info@servientrega.com</li>
+                        <li>Email: info@servientrega.com</li>
                         <li>Dirección: Calle 123 #45-67, Bogotá, Colombia</li>
                     </ul>
                 </div>
@@ -573,6 +581,24 @@
     </footer>
 
     <script>
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Tracking functionality
         function trackShipment() {
             const trackingNumber = document.getElementById('tracking-number').value.trim();
             const trackingResult = document.getElementById('tracking-result');
@@ -602,4 +628,3 @@
     </script>
 </body>
 </html>
-                            
