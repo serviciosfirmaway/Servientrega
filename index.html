@@ -1,248 +1,333 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servientrega Colombia - Seguimiento de Envíos</title>
+    <title>Seguimiento de Envíos | Servientrega</title>
+    <link rel="icon" href="https://via.placeholder.com/32/0033a0/FFFFFF?text=SV" type="image/x-icon">
     <style>
         :root {
             --primary-color: #0033a0;
-            --secondary-color: #f5f5f5;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
+            --secondary-color: #f5f7fa;
+            --accent-color: #ff6600;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #e0e6ed;
             --success-color: #4CAF50;
             --warning-color: #FF9800;
             --error-color: #F44336;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        
+
         body {
-            background-color: #f9f9f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--secondary-color);
             color: var(--text-color);
             line-height: 1.6;
         }
-        
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
+
         .container {
             width: 95%;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 15px 0;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-        }
-        
-        .logo-text {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
-            margin-left: 10px;
+            color: var(--primary-color);
         }
-        
+
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: white;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
+            margin-right: 12px;
             font-weight: bold;
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
         }
-        
+
         nav ul li {
-            margin-left: 15px;
+            margin-left: 20px;
         }
-        
+
         nav ul li a {
-            color: white;
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        
+
         nav ul li a:hover {
-            text-decoration: underline;
+            color: var(--primary-color);
         }
-        
+
+        /* Hero Section */
         .hero {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #0051c5);
             color: white;
-            padding: 40px 0;
+            padding: 60px 0;
             text-align: center;
         }
-        
+
         .hero h1 {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 15px;
         }
-        
+
         .hero p {
-            font-size: 16px;
-            max-width: 600px;
+            font-size: 18px;
+            max-width: 700px;
             margin: 0 auto;
+            opacity: 0.9;
         }
-        
+
+        /* Main Content */
         main {
-            padding: 30px 0;
+            padding: 40px 0;
         }
-        
+
+        /* Tracking Section */
         .tracking-section {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
             margin-bottom: 30px;
         }
-        
+
         .tracking-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
-        
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 600;
+            color: var(--text-color);
         }
-        
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
+
+        .input-with-button {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-group input {
+            flex-grow: 1;
+            padding: 15px;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
+            transition: border-color 0.3s;
         }
-        
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
         .btn {
-            display: inline-block;
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            padding: 15px 25px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            width: 100%;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            white-space: nowrap;
         }
-        
+
         .btn:hover {
             background-color: #002280;
         }
-        
-        .tracking-result {
-            margin-top: 30px;
-            display: none;
+
+        .btn-accent {
+            background-color: var(--accent-color);
         }
-        
+
+        .btn-accent:hover {
+            background-color: #e55500;
+        }
+
+        /* Tracking Result */
+        .tracking-result {
+            margin-top: 40px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .tracking-header {
             background-color: var(--secondary-color);
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
         }
-        
+
         .tracking-number {
             font-weight: bold;
             color: var(--primary-color);
+            font-size: 18px;
         }
-        
+
         .tracking-status {
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 20px;
             color: white;
             font-weight: bold;
             font-size: 14px;
         }
-        
-        .status-delivered {
-            background-color: var(--success-color);
-        }
-        
-        .status-transit {
-            background-color: var(--warning-color);
-        }
-        
-        .status-pending {
-            background-color: var(--error-color);
-        }
-        
+
+        .status-delivered { background-color: var(--success-color); }
+        .status-transit { background-color: var(--warning-color); }
+        .status-pending { background-color: var(--error-color); }
+
         .tracking-timeline {
             background-color: white;
+            padding: 30px 20px;
+            border-radius: 0 0 12px 12px;
             border: 1px solid var(--border-color);
             border-top: none;
-            padding: 20px;
-            border-radius: 0 0 8px 8px;
         }
-        
+
         .timeline-item {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
         }
-        
+
         .timeline-item:last-child {
             margin-bottom: 0;
         }
-        
+
         .timeline-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: var(--primary-color);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            margin-right: 20px;
             flex-shrink: 0;
             z-index: 2;
+            font-size: 20px;
         }
-        
+
         .timeline-content {
             flex-grow: 1;
         }
-        
+
         .timeline-date {
             font-weight: bold;
             margin-bottom: 5px;
+            color: var(--primary-color);
         }
-        
-        .timeline-status
+
+        .timeline-status {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .timeline-location {
+            color: var(--light-text);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 25px;
+            top: 50px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+
+        /* Admin Section */
+        .admin-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1
