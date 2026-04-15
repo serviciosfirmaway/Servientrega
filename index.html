@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -303,22 +302,6 @@
             display: none;
         }
 
-        /* Admin Section */
-        .admin-section {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 30px;
-            margin-bottom: 30px;
-            display: none;
-        }
-
-        .admin-login {
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
         /* Services Section */
         .services-section {
             background-color: white;
@@ -330,4 +313,293 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            text-align: center;
+             text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 15px;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .input-with-button {
+                flex-direction: column;
+            }
+
+            .tracking-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tracking-status {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">SV</div>
+                    <div>Servientrega</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#tracking">Seguimiento</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Seguimiento de Envíos</h1>
+            <p>Conoce el estado actual de tu paquete en tiempo real. Introduce tu número de guía para continuar.</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <section id="tracking" class="tracking-section">
+                <h2 class="section-title">Consultar Envío</h2>
+                <div class="tracking-form">
+                    <div class="form-group">
+                        <label for="tracking-number">Número de Guía</label>
+                        <div class="input-with-button">
+                            <input type="text" id="tracking-number" placeholder="Ej: 9876543210">
+                            <button class="btn" onclick="trackShipment()">Consultar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tracking-result" class="tracking-result">
+                    <div class="tracking-header">
+                        <div class="tracking-number">Guía: <span id="tracking-id">9876543210</span></div>
+                        <div class="tracking-status status-transit">En Camino</div>
+                    </div>
+                    <div class="tracking-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">📦</div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">15 de Abril, 2026 - 14:30</div>
+                                <div class="timeline-status">En Camino</div>
+                                <div class="timeline-location">Tu paquete está en ruta a la dirección de entrega. Bogotá, Colombia</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🚚</div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">15 de Abril, 2026 - 08:15</div>
+                                <div class="timeline-status">En Centro de Distribución</div>
+                                <div class="timeline-location">Tu paquete ha llegado a nuestro centro de distribución en Bogotá, Colombia</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">✅</div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">14 de Abril, 2026 - 16:45</div>
+                                <div class="timeline-status">Paquete Recibido</div>
+                                <div class="timeline-location">El remitente ha entregado tu paquete en Medellín, Colombia</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">📋</div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">14 de Abril, 2026 - 10:20</div>
+                                <div class="timeline-status">Información de Envío Creada</div>
+                                <div class="timeline-location">La guía ha sido generada. Esperando recibir el paquete.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="services-section">
+                <h2 class="section-title">Nuestros Servicios</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🚚</div>
+                        <h3>Envío Nacional</h3>
+                        <p>Cobertura en todo el territorio colombiano con la mayor eficiencia.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">✈️</div>
+                        <h3>Envío Internacional</h3>
+                        <p>Conectamos tu negocio con el mundo, envíos a más de 200 países.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📦</div>
+                        <h3>Empaquetado</h3>
+                        <p>Servicios profesionales de empaquetado para proteger tus mercancías.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Soluciones Logísticas</h3>
+                        <p>Ofrecemos soluciones integrales adaptadas a las necesidades de tu empresa.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servientrega</h3>
+                    <p>Líderes en soluciones de envío y logística en Colombia y el mundo.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#tracking">Seguimiento de Envíos</a></li>
+                        <li><a href="#services">Nuestros Servicios</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Teléfono: 01 8000 123 456</li>
+                        <li>Email: info@service
+                            <li>Email: info@servientrega.com</li>
+                        <li>Dirección: Calle 123 #45-67, Bogotá, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Servientrega. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function trackShipment() {
+            const trackingNumber = document.getElementById('tracking-number').value.trim();
+            const trackingResult = document.getElementById('tracking-result');
+            const trackingId = document.getElementById('tracking-id');
+
+            if (trackingNumber === '') {
+                alert('Por favor, ingresa un número de guía.');
+                return;
+            }
+
+            // Update the tracking number in the result
+            trackingId.textContent = trackingNumber;
+
+            // Show the tracking result
+            trackingResult.style.display = 'block';
+
+            // Scroll to the result
+            trackingResult.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow pressing Enter to track
+        document.getElementById('tracking-number').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                trackShipment();
+            }
+        });
+    </script>
+</body>
+</html>
+                            
