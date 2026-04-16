@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | Servientrega</title>
+    <link rel="icon" href="https://via.placeholder.com/32/008000/FFFFFF?text=AD" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #008000;
+            --secondary-color: #f5f7fa;
+            --accent-color: #ff6600;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #e0e6ed;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --error-color: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        
+        .public-link {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .public-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 30px 0;
+        }
+
+        .dashboard-title {
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        /* Shipment Form */
+        .form-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            height: fit-content;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #006000;
+        }
+
+        .btn-danger {
+            background-color: var(--error-color);
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+
+        .btn-warning:hover {
+            background-color: #e68900;
+        }
+
+        /* Shipments List */
+        .shipments-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+        }
+
+        .shipments-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .shipments-table th,
+        .shipments-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .shipments-table th {
+            background-color: var(--secondary-color);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .shipments-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .status-pending { background-color: var(--error-color); }
+        .status-transit { background-color: var(--warning-color); }
+        .status-delivered { background-color: var(--success-color); }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            color: white;
+        }
+
+        .update-btn {
+            background-color: var(--primary-color);
+        }
+
+        .delete-btn {
+            background-color: var(--error-color);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .close-modal:hover {
+            color: var(--text-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+                
+                .shipments-table {
+                    font-size: 14px;
+                }
+                
+                .shipments-table th,
+                .shipments-table td {
+                    padding: 8px 5px;
+                }
+                
+                .action-buttons {
+                    flex-direction: column;
+                }
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">AD</div>
+                    <div>Panel de Administración</div>
+                </div>
+                <a href="index.html" class="public-link">Ver Página Pública</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="dashboard-title">Gestión de Envíos</h1>
+            
+            <div class="dashboard-grid">
+                <!-- Shipment Form Section -->
+                <section class="form-section">
+                    <h2 class="section-title">Crear Nuevo Envío</h2>
+                    <form id="shipment-form">
+                        <div class="form-group">
+                            <label for="tracking-number">Número de Guía</label>
+                            <input type="text" id="tracking-number" placeholder="Generado automáticamente" readonly>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipient-name">Nombre del Destinatario</label>
+                                <input type="text" id="recipient-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-phone">Teléfono</label>
+                                <input type="tel" id="recipient-phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="destination">Destino</label>
+                            <input type="text" id="destination" placeholder="Ciudad, Municipio o Pueblo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Dirección Completa</label>
+                            <input type="text" id="address" placeholder="Calle, Número, Apartamento" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shipment-date">Fecha de Envío</label>
+                                <input type="date" id="shipment-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipment-time">Hora de Envío</label>
+                                <input type="time" id="shipment-time" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product-details">Detalles del Producto</label>
+                            <textarea id="product-details" rows="3" placeholder="Describe el contenido del paquete" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Peso (kg)</label>
+                                <input type="number" id="weight" step="0.01" min="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Estado Inicial</label>
+                                <select id="status" required>
+                                    <option value="pending">Pendiente</option>
+                                    <option value="transit">En Tránsito</option>
+                                    <option value="delivered">Entregado</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Guardar Envío</button>
+                    </form>
+                </section>
+                
+                <!-- Shipments List Section -->
+                <section class="shipments-section">
+                    <h2 class="section-title">Envíos Activos</h2>
+                    <div class="table-container">
+                        <table class="shipments-table">
+                            <thead>
+                                <tr>
+                                    <th>Guía</th>
+                                    <th>Destinatario</th>
+                                    <th>Destino</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipments-list">
+                                <!-- Shipments will be populated here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Update Status Modal -->
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>Actualizar Estado del Envío</h2>
+            <div class="form-group">
+                <label for="update-tracking-number">Número de Guía</label>
+                <input type="text" id="update-tracking-number" readonly>
+            </div>
+            <div class="form-group">
+                <label for="update-status">Nuevo Estado</label>
+                <select id="update-status">
+                    <option value="pending">Pendiente</option>
+                    <option value="transit">En Tránsito</option>
+                    <option value="delivered">Entregado</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="update-location">Ubicación Actual</label>
+                <input type="text" id="update-location" placeholder="Ej: Centro de Distribución Bogotá">
+            </div>
+            <div class="form-group">
+                <label for="update-notes">Notas Adicionales</label>
+                <textarea id="update-notes" rows="3" placeholder="Detalles adicionales sobre el estado actual"></textarea>
+            </div>
+            <button id="save-update" class="btn">Guardar Cambios</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize shipments array from localStorage or empty array
+        let shipments = JSON.parse(localStorage.getItem('shipments')) || [];
+        
+        // DOM elements
+        const shipmentForm = document.getElementById('shipment-form');
+        const trackingNumberInput = document.getElementById('tracking-number');
+        const shipmentsList = document.getElementById('shipments-list');
+        const updateModal = document.getElementById('update-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const saveUpdateBtn = document.getElementById('save-update');
+        
+        // Generate a random tracking number
+        function generateTrackingNumber() {
+            const randomNum = Math.floor(1000000000 + Math.random() * 9000000000);
+            return randomNum.toString();
+        }
+        
+        // Set initial tracking number
+        trackingNumberInput.value = generateTrackingNumber();
+        
+        // Save shipments to localStorage
+        function saveShipments() {
+            localStorage.setItem('shipments', JSON.stringify(shipments));
+        }
+        
+        // Render shipments list
+        function renderShipments() {
+            shipmentsList.innerHTML = '';
+            
+            if (shipments.length === 0) {
+                shipmentsList.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay envíos registrados</td></tr>';
+                return;
+            }
+            
+            shipments.forEach(shipment => {
+                const row = document.createElement('tr');
+                
+                // Determine status badge class
+                let statusClass = 'status-pending';
+                if (shipment.status === 'transit') statusClass = 'status-transit';
+                if (shipment.status === 'delivered') statusClass = 'status-delivered';
+                
+                // Determine status text
+                let statusText = 'Pendiente';
+                if (shipment.status === 'transit') statusText = 'En Tránsito';
+                if (shipment.status === 'delivered') statusText = 'Entregado';
+                
+                row.innerHTML = `
+                    <td>\${shipment.trackingNumber}</td>
+                    <td>\${shipment.recipientName}</td>
+                    <td>\${shipment.destination}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="update-btn" data-id="\${shipment.trackingNumber}">Actualizar</button>
+                            <button class="delete-btn" data-id="\${shipment.trackingNumber}">Eliminar</button>
+                        </div>
+                    </td>
+                `;
+                
+                shipmentsList.appendChild(row);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.update-btn').forEach(btn => {
+                btn.addEventListener('click', openUpdateModal);
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', deleteShipment);
+            });
+        }
+        
+        // Add or update shipment
+        shipmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const trackingNumber = trackingNumberInput.value;
+            const existingIndex = shipments.findIndex(s => s.tr
+                                                      const existingIndex = shipments.findIndex(s => s.trackingNumber === trackingNumber);
+            
+            const shipmentData = {
+                trackingNumber: trackingNumber,
+                recipientName: document.getElementById('recipient-name').value,
+                recipientPhone: document.getElementById('recipient-phone').value,
+                destination: document.getElementById('destination').value,
+                address: document.getElementById('address').value,
+                shipmentDate: document.getElementById('shipment-date').value,
+                shipmentTime: document.getElementById('shipment-time').value,
+                productDetails: document.getElementById('product-details').value,
+                weight: document.getElementById('weight').value,
+                status: document.getElementById('status').value,
+                history: existingIndex !== -1 ? 
+                    shipments[existingIndex].history : 
+                    [{
+                        date: document.getElementById('shipment-date').value,
+                        time: document.getElementById('shipment-time').value,
+                        status: document.getElementById('status').value,
+                        location: 'Oficina de origen',
+                        notes: 'Información de envío creada'
+                    }]
+            };
+            
+            if (existingIndex !== -1) {
+                shipments[existingIndex] = shipmentData;
+            } else {
+                shipments.push(shipmentData);
+            }
+            
+            saveShipments();
+            renderShipments();
+            
+            // Reset form and generate new tracking number
+            shipmentForm.reset();
+            trackingNumberInput.value = generateTrackingNumber();
+            
+            alert('Envío guardado con éxito');
+        });
+        
+        // Open update modal
+        function openUpdateModal(e) {
+            const trackingNumber = e.target.getAttribute('data-id');
+            const shipment = shipments.find(s => s.trackingNumber === trackingNumber);
+            
+            if (!shipment) return;
+            
+            document.getElementById('update-tracking-number').value = shipment.trackingNumber;
+            document.getElementById('update-status').value = shipment.status;
+            document.getElementById('update-location').value = '';
+            document.getElementById('update-notes').value = '';
+            
+            updateModal.style.display = 'flex';
+        }
+        
+        // Close update modal
+        closeModalBtn.addEventListener('click', function() {
+            updateModal.style.display = 'none';
+        });
+        
+        // Save update
+        saveUpdateBtn.addEventListener('click', function() {
+            const trackingNumber = document.getElementById('update-tracking-number').value;
+            const newStatus = document.getElementById('update-status').value;
+            const location = document.getElementById('update-location').value;
+            const notes = document.getElementById('update-notes').value;
+            
+            const shipmentIndex = shipments.findIndex(s => s.trackingNumber === trackingNumber);
+            
+            if (shipmentIndex === -1) return;
+            
+            // Update status
+            shipments[shipmentIndex].status = newStatus;
+            
+            // Add to history
+            const now = new Date();
+            shipments[shipmentIndex].history.push({
+                date: now.toISOString().split('T')[0],
+                time: now.toTimeString().split(' ')[0].substring(0, 5),
+                status: newStatus,
+                location: location || 'En ruta',
+                notes: notes || ''
+            });
+            
+            saveShipments();
+            renderShipments();
+            
+            updateModal.style.display = 'none';
+            
+            alert('Estado del envío actualizado con éxito');
+        });
+        
+        // Delete shipment
+        function deleteShipment(e) {
+            const trackingNumber = e.target.getAttribute('data-id');
+            
+            if (confirm(`¿Estás seguro de que quieres eliminar el envío con guía ${trackingNumber}?`)) {
+                shipments = shipments.filter(s => s.trackingNumber !== trackingNumber);
+                saveShipments();
+                renderShipments();
+                
+                alert('Envío eliminado con éxito');
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === updateModal) {
+                updateModal.style.display = 'none';
+            }
+        });
+        
+        // Initial render
+        renderShipments();
+    </script>
+</body>
+</html>
