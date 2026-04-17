@@ -1,0 +1,13 @@
+{
+  "name": "agente-animalitos",
+  "version": "1.0.0",
+  "description": "Agente autónomo para analizar loterías de animalitos",
+  "main": "agent.js",
+  "scripts": {
+    "start": "node agent.js"
+  },
+  "dependencies": {
+    "puppeteer": "^1^.0.0",
+    "express": "^2^.18.2"
+  }
+}
