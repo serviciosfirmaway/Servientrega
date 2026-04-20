@@ -4,10 +4,10 @@
   "description": "Agente autónomo para analizar loterías de animalitos",
   "main": "agent.js",
   "scripts": {
-    "start": "node agent.js"
+    "start": "npx puppeteer browsers install chrome"
   },
   "dependencies": {
-    "puppeteer": "^1^.0.0",
+    "puppeteer": "^4^.0.0",
     "express": "^2^.18.2"
   }
 }
