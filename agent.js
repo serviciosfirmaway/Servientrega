@@ -62,8 +62,11 @@ function generatePredictionsByHour(frequencyMap) {
 // --- EL NAVEGADOR AUTÓNOMO E INTELIGENTE ---
 async function scrapeData() {
     console.log('Iniciando ronda de scraping inteligente...');
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-    const page = await browser.newPage();
+    const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: '/opt/render/.cache/puppeteer/chrome/linux-124.0.6367.91/chrome-linux64/chrome',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+});
     
     for (const url of TARGET_URLS) {
         try {
